@@ -1,6 +1,18 @@
-# ------------
-# My Makefile
-# ------------
+# -----------------------------------------------------------------------------
+# 
+# File: Makefile
+# 
+# Name: Shivansh Rustagi
+# 
+# CruzID: shrustag
+# 
+# Class: CMPS 12B
+# 
+# Desc: The final Makefile written as per the program spec in Lab1: creates and archives both .class files 
+# (HelloUser.class and HelloUser2.class) in an executable jar file called Hello that runs function main() 
+# from HelloUser2.class. Also has `clean` utility.
+# 
+# -----------------------------------------------------------------------------
 
 # Macros
 JAVAFILES = HelloUser.java HelloUser2.java

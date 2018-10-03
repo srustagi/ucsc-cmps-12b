@@ -1,6 +1,16 @@
-#----------------------
-# Makefile with macros
-#----------------------
+# -----------------------------------------------------------------------------
+# 
+# File: Makefile2
+# 
+# Name: Shivansh Rustagi
+# 
+# CruzID: shrustag
+# 
+# Class: CMPS 12B
+# 
+# Desc: A Makefile to demonstrate the ease of text subsitution via macros.
+# 
+# -----------------------------------------------------------------------------
 
 JAVASRC = HelloUser.java
 SOURCES = README Makefile $(JAVASRC)

@@ -1,6 +1,17 @@
-#--------------------------
-# Advanced Macros Makefile
-#--------------------------
+# -----------------------------------------------------------------------------
+# 
+# File: Makefile3
+# 
+# Name: Shivansh Rustagi
+# 
+# CruzID: shrustag
+# 
+# Class: CMPS 12B
+# 
+# Desc: A Makefile with advanced macros, handling more than one source file. Illustrates the power and simplicity 
+# of macros in building Makefiles.
+# 
+# -----------------------------------------------------------------------------
 
 JAVASRC = HelloUser.java HelloUser2.java
 SOURCES = README Makefile $(JAVASRC)

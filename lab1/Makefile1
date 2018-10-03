@@ -1,4 +1,17 @@
-# A simple Makefile
+# -----------------------------------------------------------------------------
+# 
+# File: Makefile1
+# 
+# Name: Shivansh Rustagi
+# 
+# CruzID: shrustag
+# 
+# Class: CMPS 12B
+# 
+# Desc: A simple Makefile to illustrate the convenience of Makefiles.
+# 
+# -----------------------------------------------------------------------------
+
 HelloUser: HelloUser.class
 	echo Main-class: HelloUser > Manifest
 	jar cvfm HelloUser Manifest HelloUser.class

@@ -1,8 +1,11 @@
-//-----------------------------------------------------------------------------
-// HelloUser.java
-// This is a really simple program to get you started.
-// Prints greeting to stdout, then prints out some environment information.
-//-----------------------------------------------------------------------------
+/* ----------------------------------------------------------------------------
+ File: HelloUser.java
+ Name: Shivansh Rustagi
+ CruzID: shrustag
+ Class: CMPS 12B
+ Desc: A short starter program which greets the current user and prints 
+ 	   information about the machine it's being run on. Used by makefiles.
+---------------------------------------------------------------------------- */
 class HelloUser{
 	public static void main( String[] args ){
 		String userName = System.getProperty("user.name"); /* this should be you! */
