@@ -7,7 +7,7 @@ JAVAFILES = HelloUser.java HelloUser2.java
 # SOURCES = README Makefile $(JAVASRC)
 MAINCLASS = HelloUser2
 CLASSES = HelloUser.class HelloUser2.class
-JarFile = Hello
+JARFILE = Hello
 
 all: $(JARFILE)
 
