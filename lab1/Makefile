@@ -6,7 +6,7 @@
 # 
 # CruzID: shrustag
 # 
-# Class: CMPS 12B
+# Class: CMPS 12M
 # 
 # Desc: The final Makefile written as per the program spec in Lab1: creates and archives both .class files 
 # (HelloUser.class and HelloUser2.class) in an executable jar file called Hello that runs function main() 
@@ -14,9 +14,8 @@
 # 
 # -----------------------------------------------------------------------------
 
-# Macros
-JAVAFILES = HelloUser.java HelloUser2.java
-# SOURCES = README Makefile $(JAVASRC)
+JAVASRC = HelloUser.java HelloUser2.java
+SOURCES = README Makefile $(JAVASRC)
 MAINCLASS = HelloUser2
 CLASSES = HelloUser.class HelloUser2.class
 JARFILE = Hello
@@ -29,8 +28,8 @@ $(JARFILE): $(CLASSES)
 	rm Manifest
 	chmod +x $(JARFILE)
 
-$(CLASSES): $(JAVAFILES)
-	javac -Xlint $(JAVAFILES)
+$(CLASSES): $(JAVASRC)
+	javac -Xlint $(JAVASRC)
 
 clean:
 	rm $(CLASSES)

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define MAX 5          
+#define MAX 5         
 /* no magic numbers, get used to defining them as constants */
 
 int main(){
