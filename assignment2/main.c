@@ -21,44 +21,51 @@ int main () {
 
 void test0() {
 
-    NodeObj *node1 = NULL;
     NodeObj *list = NULL;
-    int i = 0;
+    NodeObj *node1 = NULL;
+    NodeObj *node2 = NULL;
+    NodeObj *node3 = NULL;
+    // int i;
 
-
-    printf("bad insert with bad parameters- should catch these errors to stderr \n");
+    // printf("bad insert with bad parameters- should catch these errors to stderr \n");
+    
     // insert(NULL, node1);
-    insert (&list, NULL);
+    // insert (&list, NULL);
 
-    printf("test a bunch of unordered inserts, 1,2,3, ...9 increasing order \n");
-    printf("list traversal should be in order 1,2,3, ...9\n");
-
-    for (i = 1; i < 10 ; i++) {
-        node1 = create_new_node(i);
-        insert(&list, node1);
-        printf("%d\n", i);
-    }
+    // printf("test a bunch of unordered inserts, 1,2,3, ...9 increasing order \n");
+    // printf("list traversal should be in order 1,2,3, ...9\n");
+    
+    node1 = create_new_node(1);
+    node2 = create_new_node(2);
+    node3 = create_new_node(3);
+    insert(&list, node1);
+    insert(&list, node2);
+    insert(&list, node3);
+    // for (i = 1; i < 10 ; i++) {
+    // }
+    traverse_print(list);
+    delete_all(list);
     traverse_print(list);
 
     printf("end test 0 \n");
 }
 
 
-void test1() {
+// void test1() {
 
-    NodeObj *node1 = NULL;
-    NodeObj *list = NULL;
-    int i;
+//     NodeObj *node1 = NULL;
+//     NodeObj *list = NULL;
+//     int i;
 
-    printf("test a bunch of inserts, 1,2,3, ,,,9 increasing order \n");
-    printf("list traversal should be in order 1,2,3,...9\n");
+//     printf("test a bunch of inserts, 1,2,3, ,,,9 increasing order \n");
+//     printf("list traversal should be in order 1,2,3,...9\n");
 
-    for (i = 1; i < 10 ; i++) {
-        node1 = create_new_node(i);
-        // ordered_insert(&list, node1);
-    }
-    traverse_print(list);
+//     for (i = 1; i < 10 ; i++) {
+//         node1 = create_new_node(i);
+//         ordered_insert(&list, node1);
+//     }
+//     traverse_print(list);
 
-    printf("end test 1 \n");
-}
+//     printf("end test 1 \n");
+// }
 

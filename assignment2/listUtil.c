@@ -14,7 +14,7 @@ void print_node(NodeObj *node) {
     else {
         /* for testing using file diff you will likely want to remove ptr value printing */
         printf("Node: value=%d,  node_ptr = %p, prev=%p, next=%p \n",
-        node->value, node, node->prev,  node->next);
+               node->value, node, node->prev,  node->next);
     }
 }
 
@@ -24,7 +24,7 @@ void print_node(NodeObj *node) {
  */
 void traverse_print(NodeObj *list_head) {
 
-    NodeObj *ptr=NULL;    /* show other way to do this */
+    NodeObj *ptr = NULL;  /* show other way to do this */
 
     ptr = list_head;
 
