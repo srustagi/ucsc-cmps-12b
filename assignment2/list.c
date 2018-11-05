@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "listUtil.h"
+#include "list.h"
 
 NodeObj *create_new_node(int id) {
 	NodeObj *data;
+	data = NULL;
 	data = (NodeObj *) malloc(sizeof(NodeObj));
 	assert(data != NULL);
 	data -> value = id;
@@ -21,8 +22,10 @@ void insert(NodeObj **list_head, NodeObj *to_be_inserted) {
 	// 	fprintf(stderr, "The list is NULL! Please pass a valid list as a parameter.\n");
 	// }
 
-	if ( to_be_inserted == NULL )
+	if ( to_be_inserted == NULL ) {
 		fprintf(stderr, "The object to be inserted is NULL! Please insert a valid node.\n");
+		return;
+	}
 
 	else if ( temp == NULL ) {
 		*list_head = to_be_inserted;
@@ -39,9 +42,44 @@ void insert(NodeObj **list_head, NodeObj *to_be_inserted) {
 	}
 
 }
-// void ordered_insert(NodeObj **list_head, NodeObj *to_be_inserted);
+
+void ordered_insert(NodeObj **list_head, NodeObj *to_be_inserted) {
+	NodeObj *temp;
+	temp = *list_head;
+
+	if ( to_be_inserted == NULL ) {
+		fprintf(stderr, "The node to be inserted is empty! Please pass a valid node.\n");
+		return;
+	}
+
+	if ( temp == NULL ) {
+		insert(list_head, to_be_inserted);
+	}
+
+	else if ( temp -> value >= to_be_inserted -> value ) {
+		temp -> prev = to_be_inserted;
+		to_be_inserted -> next = temp;
+		to_be_inserted -> prev = NULL;
+		*list_head = to_be_inserted;
+	}
+
+	else {
+		while ( temp -> next != NULL && temp -> value < to_be_inserted -> value )
+			temp = temp -> next;
+		if ( temp -> next == NULL ) {
+			temp -> next = to_be_inserted;
+			to_be_inserted -> prev = temp;
+			to_be_inserted -> next = NULL;
+		} else {
+			to_be_inserted -> prev = temp -> prev;
+			to_be_inserted -> next = temp;
+			temp -> prev = to_be_inserted;
+		}
+	}
+}
+
 void delete_all(NodeObj *list_head) {
-	while(list_head != NULL)
+	while (list_head != NULL)
 		delete(&list_head, list_head);
 }
 
@@ -73,14 +111,14 @@ void delete(NodeObj **list_head, NodeObj *to_be_deleted) {
 	}
 
 	else {
-		while( temp != to_be_deleted && temp != NULL )
+		while ( temp != to_be_deleted && temp != NULL )
 			temp = temp -> next;
-		
-		if( temp == NULL ) {
+
+		if ( temp == NULL ) {
 			fprintf(stderr, "The object to be deleted isn't in the list! Please try again.\n");
 			return;
 		}
-		
+
 		else {
 			if ( temp -> next == NULL ) {
 				(temp -> prev) -> next = NULL;
@@ -92,7 +130,7 @@ void delete(NodeObj **list_head, NodeObj *to_be_deleted) {
 				(temp -> prev) -> next = temp -> next;
 				(temp -> next) -> prev = temp -> prev;
 				delete_temp = temp;
-				free(delete_temp);	
+				free(delete_temp);
 			}
 		}
 	}
