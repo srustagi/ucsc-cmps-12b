@@ -10,7 +10,7 @@ TESTING = main
 FUNCTIONS = list_funcs
 EXEBIN = $(TESTING)
 OBJECTS = $(TESTING).o $(FUNCTIONS).o
-SOURCES = $(TESTING).c $(FUNCTIONS).c
+SOURCES = $(TESTING).c $(FUNCTIONS).c list.h
 
 all : $(EXEBIN)
 

@@ -152,6 +152,7 @@ void delete_all(NodeObj *list_head) {
 		delete(&list_head, list_head);
 }
 
+
 /*
  * Function: delete
  * Params:

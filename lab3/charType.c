@@ -67,7 +67,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	// set memory dynamically for both the input line and each individual subset line
-	input = (char *) calloc(MAX_STRING_LENGTH + 1, sizeof(char) );
+	input = (char *) malloc( (MAX_STRING_LENGTH + 1) * sizeof(char) );
 	alpha = (char *) calloc(MAX_STRING_LENGTH + 1, sizeof(char) );
 	digit = (char *) calloc(MAX_STRING_LENGTH + 1, sizeof(char) );
 	punct = (char *) calloc(MAX_STRING_LENGTH + 1, sizeof(char) );

@@ -21,17 +21,18 @@ int main(void) {
 	ordered_insert(&list_head, shiv);
 	ordered_insert(&list_head, kamil);
 	ordered_insert(&list_head, george);
-	delete(&list_head, kamil);
-	delete(&list_head, nibba);
-	delete(&list_head, soma);
-	delete(&list_head, shiv);
-	delete(&list_head, george);
-	delete(&list_head, list_head);
+	// delete(&list_head, kamil);
+	// delete(&list_head, nibba);
+	// delete(&list_head, soma);
+	// delete(&list_head, shiv);
+	// delete(&list_head, george);
+	// delete(&list_head, list_head);
 	// empty(list_head);
 	// list_head = NULL;
 	// ordered_insert(&list_head, george);
-	print_struct(list_head);
-	// print_node(find_next_distance_rider(temptemp, 0.001));
+	// print_struct(list_head);
+	// find_next_distance_rider(list_head, 0.025);
+	print_node(find_next_distance_rider(list_head, 0.025));
 	return EXIT_SUCCESS;
 }
 

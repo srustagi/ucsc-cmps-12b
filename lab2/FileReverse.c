@@ -1,3 +1,10 @@
+/*
+ File: FileReverse.c
+ Name: Shivansh Rustagi
+ CruzID: 1651034
+ Class: CMPS 12M
+ Desc: A program which reads words from a file, and writes them to another file, reversed, one per line.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -63,7 +70,7 @@ void stringReverse(char* s) {
 	int j = strlen(s) - 1;
 	char temp;
 
-	// start at both ends of the string and swap characters until the two indexes meet, and then stop as the whole string is reversed
+	// start at both ends of the string and swap characters until the two indexes meet, and then stop.
 	while (i < j) {
 		temp = s[i];
 		s[i] = s[j];

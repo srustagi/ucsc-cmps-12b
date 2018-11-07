@@ -17,6 +17,7 @@
  */
 void print_node(NodeObj *node);
 
+
 /*
  * Function: print_node
  * Params:
@@ -27,6 +28,7 @@ void print_node(NodeObj *node);
  *      Prints the specified node.
  */
 void traverse_print(NodeObj *list_head);
+
 
 /*
  * Function: reverse print

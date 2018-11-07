@@ -94,10 +94,10 @@ void test2(){
     ordered_insert(&list, node4);
     ordered_insert(&list, node2);
     ordered_insert(&list, node3);
-    ordered_insert(&list, node6);
+    // ordered_insert(&list, node6);
     ordered_insert(&list, node5);
 
-    delete_all(list);
+    delete(&list, node6);
 
     traverse_print(list);
 
