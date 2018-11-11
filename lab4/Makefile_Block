@@ -2,12 +2,12 @@
 # Makefile for Block ADT and its test client
 #------------------------------------------------------------------------------
 
-ADT_NAME  =  Block
-SOURCES   = $(ADT_NAME).c   $(ADT_NAME)Client.c
-OBJECTS   = $(ADT_NAME).o   $(ADT_NAME)Client.o
-HEADERS   = $(ADT_NAME).h
-EXEBIN    = $(ADT_NAME)Client
-FLAGS     = -std=c99 -Wall
+ADT_NAME = Block
+SOURCES = $(ADT_NAME).c $(ADT_NAME)Client.c
+OBJECTS = $(ADT_NAME).o $(ADT_NAME)Client.o
+HEADERS = $(ADT_NAME).h
+EXEBIN = $(ADT_NAME)Client
+FLAGS = -std=c99 -Wall
 
 all: $(EXEBIN)
 
@@ -22,3 +22,6 @@ clean :
 
 check:
 	valgrind --leak-check=full $(EXEBIN) 
+
+run:
+	./$(ADT_NAME)Client

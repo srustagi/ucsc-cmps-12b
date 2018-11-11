@@ -75,5 +75,5 @@ long hash(Block B) {
 // print the block id and data
 // (NOTE: for debugging purposes you may want to have it also print the hash and previousHash values during development.)
 void printBlock(FILE* out, Block B) {
-	fprintf(out, "%d:%s", B -> id, B -> data);
+	fprintf(out, "%d:%s\n", B -> id, B -> data);
 }

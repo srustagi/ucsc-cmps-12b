@@ -3,8 +3,8 @@
 // Test client for Blockchain ADT
 //-----------------------------------------------------------------------------
 
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "Blockchain.h"
 
 //////// add your own tests here /////////////
