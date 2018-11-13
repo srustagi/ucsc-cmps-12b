@@ -21,5 +21,8 @@ $(OBJECTS) : $(SOURCES) $(HEADERS)
 clean :
 	rm -f $(EXEBIN) $(OBJECTS)
 
-check:
+check :
 	valgrind --leak-check=full $(EXEBIN) 
+
+run :
+	./BlockchainClient
