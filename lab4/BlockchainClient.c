@@ -1,16 +1,33 @@
-//-----------------------------------------------------------------------------
-// BlockchainClient.c
-// Test client for Blockchain ADT
-//-----------------------------------------------------------------------------
-
-#include<stdio.h>
-#include<stdlib.h>
+/*
+ * File: BlockchainClient.c
+ * Name: Shivansh Rustagi
+ * Class: CMPS 12M
+ * CruzID: 1651034
+ * Description: tests for Blockchain functions
+ */
+#include <stdio.h>
+#include <stdlib.h>
 #include "Blockchain.h"
 
 //////// add your own tests here /////////////
 
 
 int main(int argc, char* argv[]){
+
+  Blockchain test = newBlockchain();
+  // printf("%d\n", valid(test));
+  // printBlock(stdout, get(test, 67));
+  // printf("%d\n", valid(test));
+  printf("%d\n", append(test, "hee hee"));
+  printf("%d\n", append(test, "ha ha"));
+  printf("%d\n", append(test, "ho ho"));
+  printBlockchain(stdout, test);
+  // printBlockchain(stdout, test);
+  freeBlockchain(test);
+  printBlockchain(stdout, test);
+
+
+  printf("-----------------------------------------------------\n");
 
   Blockchain chain = newBlockchain();
 

@@ -1,41 +1,131 @@
-//-----------------------------------------------------------------------------
-// Blockchain.h
-// Header file for the Blockchain ADT
-//-----------------------------------------------------------------------------
+/*
+ * File: Blockchain.h
+ * Name: Shivansh Rustagi
+ * Class: CMPS 12M
+ * CruzID: 1651034
+ * Description: prototypes of Blockchain functions
+ */
 
+// include guard
 #ifndef _BLOCKCHAIN_H_INCLUDE_
 #define _BLOCKCHAIN_H_INCLUDE_
 
 #include "Block.h"
 
-// Exported reference type
+/*
+ * Structure: 
+ * 		BlockchainObj
+ * Params:
+ * 		Block blocks[BLOCKCHAIN_SIZE]: array of blocks of size BLOCKCHAIN_SIZE
+ * 		int size: current size of Blockchain
+ */
 typedef struct BlockchainObj* Blockchain;
 
-// constructor for the Blockchain type
+
+/* 
+ * Function:
+ * 		newBlockchain
+ * Params:
+ * 		None
+ * Return values:
+ *		chain: a pointer to the newly allocated memory for the Blockchain object
+ * Description:
+ * 		Constructor for the Blockchain object
+ */
 Blockchain newBlockchain();
 
-// destructor for the Blockchain type
+
+/* 
+ * Function:
+ * 		freeBlockchain
+ * Params:
+ * 		Blockchain B: the Blockchain to be freed
+ * Return values:
+ *		None
+ * Description:
+ * 		Deallocate the entire Blockchain
+ */
 void freeBlockchain(Blockchain B);
 
-// append a new block to the chain with the data specified in the new block
-// return the size of the block chain if successful and 0 otherwise
+
+/* 
+ * Function:
+ * 		append
+ * Params:
+ * 		Blockchain B: the Blockchain to which the new Block will be appended
+ * 		char* data: the data for the new Block which is to be added to the chain
+ * Return values:
+ *		the size of the chain if successful, or 0 otherwise
+ * Description:
+ * 		Append a new Block to the chain with given data
+ */
 int append(Blockchain B, char* data);
 
-// return the number of blocks in this chain
+
+/* 
+ * Function:
+ * 		size
+ * Params:
+ * 		Blockchain B: the Blockchain of which the size is being calculated
+ * Return values:
+ *		B -> size: the size of the chain
+ * Description:
+ * 		Returns the size of the chain, -1 if not successful
+ */
 int size(Blockchain B);
 
-// return the block at index idx in the chain
+
+/* 
+ * Function:
+ * 		get
+ * Params:
+ * 		Blockchain B: the Blockchain to retrieve the Block from
+ * 		int idx: the index for the Block which is to be retrieved
+ * Return values:
+ *		(B -> blocks)[idx]: the Block at position `idx`
+ * Description:
+ * 		Get the specified block at index idx. Returns a block with hash, id as -1 and string as NULL as failed result
+ */
 Block get(Blockchain B, int idx);
 
-// check if this is a valid chain by checking the stored previousHash values in each block
-// return 1 if valid, 0 otherwise
+
+/* 
+ * Function:
+ * 		valid
+ * Params:
+ * 		Blockchain B: the Blockchain to validate
+ * Return values:
+ *		1 or 0; 1 for valid, 0 for invalid
+ * Description:
+ * 		Check if the chain is a valid chain by comparing the previous hash values to the hash of the previous block
+ */
 int valid(Blockchain B);
 
-// shorten the chain by revmoing the last block
-// do nothing if the chain is already empty
+
+/* 
+ * Function:
+ * 		removeLast
+ * Params:
+ * 		Blockchain B: the Blockchain to shorten
+ * Return values:
+ *		None
+ * Description:
+ * 		Remove the last Block in the specified Blockchain
+ */
 void removeLast(Blockchain B);
 
-// print the chain
+
+/* 
+ * Function:
+ * 		printBlockchain
+ * Params:
+ * 		FILE* out: the file to write to
+ * 		Blockchain B: the Blockchain to print
+ * Return values:
+ *		None
+ * Description:
+ * 		Print the entire Blockchain
+ */
 void printBlockchain(FILE* out, Blockchain B);
 
 #endif

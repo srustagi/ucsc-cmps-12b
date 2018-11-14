@@ -1,6 +1,8 @@
-#------------------------------------------------------------------------------
-# Makefile for Blockchain ADT and its test client
-#------------------------------------------------------------------------------
+# File: Makefile
+# Name: Shivansh Rustagi
+# CruzID: 1651034
+# Class: CMPS 12M
+# Description: Makefile for the Blockchain ADT
 
 ADT_NAME = Blockchain
 ADT_DEPENDENCIES = Block
@@ -25,4 +27,4 @@ check :
 	valgrind --leak-check=full $(EXEBIN) 
 
 run :
-	./BlockchainClient
+	./$(EXEBIN)
