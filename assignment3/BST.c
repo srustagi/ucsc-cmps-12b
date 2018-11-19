@@ -253,18 +253,19 @@ int treeHeight(BSTObj * T, int height) {
 		return -1;
 	}
 
-	// if the tree is NULL just return zero
-	if ( T == NULL )
-		return 0;
+	if ( T -> leftChild == NULL && T -> rightChild == NULL ){
+		return height;
+	}
 
-	// find the height of the left and right subtrees
-	int left = treeHeight(T -> leftChild, height);
-	int right = treeHeight(T -> rightChild, height);
+	int left = 0;
+	int right = 0;
 
-	// if the left side height is higher than the right, return it
-	if ( left > right )
-		return left + 1;
-	return right + 1;
+	if ( T -> leftChild != NULL ) left = treeHeight(T -> leftChild, height + 1);
+	if ( T -> rightChild != NULL ) right = treeHeight(T -> rightChild, height + 1);
+
+	if ( left > right)
+		return left;
+	return right;
 
 }
 

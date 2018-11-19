@@ -8,10 +8,10 @@
 ADT = BST
 FLAGS = -std=c99 -Wall
 TESTING = $(ADT)Client
-SOURCES = $(ADT).c $(ADT)Client.c
-OBJECTS = $(ADT).o $(ADT)Client.o
+SOURCES = $(ADT).c $(TESTING).c
+OBJECTS = $(ADT).o $(TESTING).o
 HEADERS = $(ADT).h
-EXEBIN = $(ADT)Client
+EXEBIN = $(TESTING)
 
 all : $(EXEBIN)
 	

@@ -28,10 +28,23 @@ int main(int argc, char* argv[]){
     insert("aaz", &T);
     insert("zoo", &T);
 
+    printf("%d\n", treeHeight(T, 0));
+
+    BSTObj *temp;
+    temp = copyTree(T);
+    insert("gay", &temp);
+    printf("%d\n", find("gay", temp));
+    printf("%d\n", find("bhenchod", temp));
+    inorderTraverse(stdout, temp);
+
+
     printf("inorder traverse == \n");
     inorderTraverse(stdout, T);
-    printf("\n== after traverse ==\n ");
+    printf("\n== after traverse ==\n");
 
-   
-  return 0;
+    makeEmpty(&T);
+    makeEmpty(&temp);
+    inorderTraverse(stdout, T);
+
+    return 0;
 }
