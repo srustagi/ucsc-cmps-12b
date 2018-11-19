@@ -138,8 +138,12 @@ BSTObj * copyTree(BSTObj *T) {
 	if (T == NULL )
 		return T;
     BSTObj * temp = (BSTObj *) malloc(sizeof(BSTObj));
+    char* temp_string = (char *) malloc((strlen(T -> term) + 1) * sizeof(char));
+
     assert(temp != NULL);
-    temp -> term = T -> term;
+    assert(temp_string != NULL);
+
+    temp -> term = temp_string;
     temp -> leftChild = copyTree(T -> leftChild);
     temp -> rightChild = copyTree(T -> rightChild);
     return temp;
