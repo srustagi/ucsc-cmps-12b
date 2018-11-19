@@ -99,21 +99,19 @@ void inorderLeaves(FILE *out, BSTObj *T) {
 // return TRUE if the item_to_find matches a string stored in the tree
 int find(char *term_to_find, BSTObj *T) {
 
-	while ( T != NULL ) {
-		if ( strcmp(term_to_find, T -> term) == 0 ) {
-			return TRUE;
-		}
+    if ( T == NULL )
+    	return FALSE;
 
-		else if ( strcmp(term_to_find, T -> term) < 0 ) {
-			find(term_to_find, T -> leftChild);
-		}
-
-		else if ( strcmp(term_to_find, T -> term) > 0 ) {
-			find(term_to_find, T -> rightChild);
-		}
-	}
-
-	return FALSE;
+    if ( strcmp(term_to_find, T -> term) == 0 ) 
+       return TRUE;
+     
+    // Key is greater than root's key 
+    if ( strcmp(term_to_find, T -> term) < 0 ) 
+       return find(term_to_find, T -> leftChild); 
+  
+    // Key is smaller than root's key 
+    else
+    	return find(term_to_find, T -> rightChild); 
 
 }
 
@@ -122,24 +120,29 @@ int find(char *term_to_find, BSTObj *T) {
 // call with height = 0 and root of tree
 int treeHeight(BSTObj *T, int height) {
 
-	int count = 0;
-
 	if ( T == NULL )
 		return 0;
 
-	int left = treeHeight(T, count);
-	int right = treeHeight(T, count);
+	int left = treeHeight(T -> leftChild, height);
+	int right = treeHeight(T -> rightChild, height);
 
 	if ( left > right )
-		return treeHeight(T -> leftChild, count++);
-	return treeHeight(T -> rightChild, count++);
+		return left + 1;
+	return right + 1;
 
 }
 
 
 // create and return a complete memory independent copy of the tree
 BSTObj * copyTree(BSTObj *T) {
-	return (BSTObj *) malloc( sizeof( BSTObj ) );
+	if (T == NULL )
+		return T;
+    BSTObj * temp = (BSTObj *) malloc(sizeof(BSTObj));
+    assert(temp != NULL);
+    temp -> term = T -> term;
+    temp -> leftChild = copyTree(T -> leftChild);
+    temp -> rightChild = copyTree(T -> rightChild);
+    return temp;
 }
 
 
@@ -157,7 +160,5 @@ void makeEmpty(BSTObj **pT) {
 		free(*pT);
 		*pT = NULL;
 	}
-
-	pT = NULL;
 
 }
