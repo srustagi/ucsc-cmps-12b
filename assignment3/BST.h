@@ -106,7 +106,7 @@ int find(char *term_to_find, BSTObj *T);
  * Function: treeHeight
  * Params:
  *      BSTObj * T: the tree whose height to calculate
- *      int height: the height
+ *      int height: the current height of the tree, used in recursion
  * Return values:
  *      TRUE or FALSE as defined in BST.h
  * Description:
