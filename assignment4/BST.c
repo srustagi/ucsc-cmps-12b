@@ -23,6 +23,22 @@
  */
 BSTObj * newBSTObj(char * term);
 
+BSTObj * findLeftMostChild(BSTObj * T);
+
+BSTObj * findLeftMostChild(BSTObj * T) {
+	BSTObj * temp = T;
+	if ( T == NULL ) {
+		return NULL;
+	}
+	if ( T -> leftChild == NULL ) {
+		return T;
+	}
+	while ( (T -> leftChild) -> leftChild != NULL ) {
+		temp = temp -> leftChild;
+	}
+	return temp;
+}
+
 // see prototype for newBSTObj above
 BSTObj * newBSTObj(char * term) {
 	
