@@ -59,7 +59,7 @@ newExpressionTree() {
  * Return Values:
  *      None
  * Description:
- *      Destructor for Stacks
+ *      Destructor for Stacks: recursively delete the left and right nodes and free the current one
  */
 void
 deleteTree(TNode *T) {
@@ -81,7 +81,7 @@ deleteTree(TNode *T) {
  * Return Values:
  *      None
  * Description:
- *      
+ *      Delete the whole expression tree using the deleteTree utility function while the stack is nonempty
  */
 void
 deleteExpressionTree(ExpT *T) {
@@ -104,7 +104,7 @@ deleteExpressionTree(ExpT *T) {
  * Return Values:
  *      None
  * Description:
- *      
+ *      Utility function to print node
  */
 void
 printNode( TNode * node) {
@@ -178,6 +178,7 @@ convertToken( char *tokenStr, int *tokenVal) {
 
 }
 
+
 /*
  * Function:
  *      newTNode
@@ -189,7 +190,7 @@ convertToken( char *tokenStr, int *tokenVal) {
  * Return Values:
  *      node: a pointer to a node containing the passed information
  * Description:
- *      
+ *      Construct a node with either operands or a number depending on the passed input
  */
 TNode *
 newTNode(tokenType inputToken, int tokenVal, TNode *op1, TNode *op2)  {
@@ -221,7 +222,7 @@ newTNode(tokenType inputToken, int tokenVal, TNode *op1, TNode *op2)  {
  * Return Values:
  *      tokenChars[tokenT]: the converted token
  * Description:
- *     
+ *      Using the enum defined in ExpTree.h, convert the passed token to a string representation of the operator
  */
 const char *
 tokenToStr(tokenType tokenT) {
@@ -238,12 +239,13 @@ tokenToStr(tokenType tokenT) {
  * Params:
  *      TNode * T: a pointer to the node which to evaluate 
  * Return Values:
- *      
+ *      Returns the evalution of the specified 
  * Description:
- *      
+ *      Evaluates the passed expression tree
  */
 int
 expressionEval(TNode *T) {
+    // base case
     if ( T == NULL ) {
         return 0;
     }
@@ -268,7 +270,7 @@ expressionEval(TNode *T) {
 
             if (T -> type == DIV) {
                 if ( right == 0 ){
-                    fprintf(stderr, "dividing by 0 warning");
+                    fprintf(stderr, "Cannot divide by zero.");
                     return 0;
                 }
                 else {
@@ -282,25 +284,29 @@ expressionEval(TNode *T) {
 
 /*
  * Function:
- *      expressionEval
+ *      inorderTraverse
  * Params:
- *      TNode * T: a pointer to the node which to evaluate 
+ *      FILE *out: the file to print to
+ *      TNode * T: a pointer to the node to print 
  * Return Values:
- *      
+ *      None
  * Description:
- *      
+ *      Traverse the expression tree to return an inorder representation of the tree
  */
 void
 inorderTraverse(FILE *out, TNode  *T) {
+    // empty file error handling
     if ( out == NULL ){
-        fprintf( stderr , "inorderTraverse - Handle to output file is NULL");
+        fprintf( stderr , "Sorry, the file passed is NULL, please pass a valid file.");
         return;
     }
 
+    // operand case
     if ( T->type == OPERAND){
         fprintf(out, "(%i)", T->value);
     }
 
+    // operator case
     else{
         fprintf( out ,"(");
         inorderTraverse( out , T->leftOperand);
@@ -310,6 +316,17 @@ inorderTraverse(FILE *out, TNode  *T) {
     }
 }
 
+
+/*
+ * Function:
+ *      outputExpressionTree
+ * Params:
+ *      ExpT * T: the expression tree to print
+ * Return Values:
+ *      None
+ * Description:
+ *      Output the expression tree with both the inorder traversal and the evaluated expression
+ */
 void
 outputExpressionTree(ExpT *T) {
 
@@ -331,6 +348,17 @@ outputExpressionTree(ExpT *T) {
 
 }
 
+
+/*
+ * Function:
+ *      inputExpressionTree
+ * Params:
+ *      ExpT * T: the expression tree to read data into
+ * Return Values:
+ *      None
+ * Description:
+ *      Read in an expression tree from the command line using postfix notation, build tree using stack
+ */
 void
 inputExpressionTree(ExpT *T) {
 
