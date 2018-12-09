@@ -87,7 +87,7 @@ int hash(char * key, int tableSize) {
  *      Helper function to hash a string, returning an integer in the range 0 to tableSize-1
  */
 bucketList new_bucket_node(char * term) {
-	bucketList node = calloc (1, sizeof(bucketListObj) + strlen(str) + 1);// (bucketList) malloc(sizeof(bucketListObj) + (strlen(term) + 1) * sizeof(char));
+	bucketList node = calloc (1, sizeof(bucketListObj) + strlen(term) + 1);// (bucketList) malloc(sizeof(bucketListObj) + (strlen(term) + 1) * sizeof(char));
 	assert(node != NULL);
 	node -> next = NULL;
 	strcpy(node -> item, term);
