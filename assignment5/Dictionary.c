@@ -118,7 +118,7 @@ bucketList find_bucket(bucketList b, char * term) {
 // Hash Table Functions
 HashTableObj * newHashTable(int size) {
 	int i;
-	HashTableObj * table = (HashTableObj *) malloc(sizeof(HashTableObj) + sizeof(bucketList) * size);
+	HashTableObj * table = (HashTableObj *) malloc(sizeof(HashTableObj) + sizeof(bucketListObj) * size);
 	assert(table != NULL);
 	table -> size = size;
 	for ( i = 0; i < size; i++ ) {
