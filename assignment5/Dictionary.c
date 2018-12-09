@@ -219,10 +219,10 @@ void deleteHashTable (HashTableObj * H) {
 	int i;
 	for ( int i = 0; i < H -> size; i++ ) {
 		if((H -> bucket)[i] -> item != NULL) {
-			delete(H, (H -> bucket)[i] -> item);
+			free((H -> bucket)[i]);
 		}
 	}
-	// free(H);
+	free(H);
 }
 
 void printHashTable(FILE *out, HashTableObj *H) {
