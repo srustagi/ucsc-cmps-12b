@@ -217,9 +217,16 @@ bool delete(HashTableObj *H, char *str) {
 
 void deleteHashTable (HashTableObj * H) {
 	int i;
+	bucketList temp = NULL;
+	bucketList curr = NULL;
 	for ( int i = 0; i < H -> size; i++ ) {
 		if((H -> bucket)[i] -> item != NULL) {
-			free((H -> bucket)[i]);
+			curr = H -> bucket[i];
+			while(curr!=NULL){
+				temp = curr;
+				curr = curr -> next;
+				free(temp);
+			}
 		}
 	}
 	free(H);
