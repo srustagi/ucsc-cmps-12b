@@ -411,49 +411,9 @@ int deleteItem (char *term_to_delete, BSTObj **pT){
 			}
 			else{
 					BSTObj *tmp = findLeftMostChild(T->rightChild);
-					T->term = tmp->term;
+					strcpy(T->term, tmp->term);
 					return deleteItem(T->term, &(T->rightChild));
 			}
 	}
 	return TRUE;
 }
-
-// int deleteItem (char *term_to_delete, BSTObj **pT) {
-// 	int status = 1;
-// 	BSTObj * temp = NULL;
-// 	BSTObj * deleteTemp = NULL;
-
-// 	if ( pT == NULL ) {
-// 		fprintf(stderr, "Sorry, the pointer to the tree address is NULL. Please pass a valid pointer.\n");
-// 		return status;
-// 	}
-
-// 	if ( *pT == NULL ) {
-// 		fprintf(stderr, "Sorry, the tree is empty. Please insert some nodes and try again.\n");
-// 		return status;
-// 	}
-
-// 	if ( term_to_delete == NULL) {
-// 		fprintf(stderr, "Sorry, the string you're searching for is NULL. Please pass a valid string and try again.\n");
-// 		return status;
-// 	}
-
-// 	if ( find(term_to_delete, *pT) == FALSE ) {
-// 		fprintf(stderr, "Sorry, the string you are searching for is not in the tree.\n");
-// 		return status;
-// 	}
-
-// 	temp = get(term_to_delete, *pT);
-// 	// zero children
-// 	if ( (temp) -> leftChild == NULL && (temp) -> rightChild == NULL) {
-// 		printf("before free\n");
-// 		free(temp);
-// 		printf("after free\n");
-// 		// temp = NULL;
-// 		printf("succuess\n");
-// 	}
-		
-	
-// 	status = 0;
-// 	return status;
-// }
