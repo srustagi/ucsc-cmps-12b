@@ -24,8 +24,8 @@ int main(int argc, char* argv[]){
 
     printf("inserting a lot of nodes to build a tree \n");
     insert("cat", &T);
-    // insert("rat", &T);
-    // insert("bat", &T);
+    insert("rat", &T);
+    insert("bat", &T);
     // insert("crow", &T);
     // insert("dog", &T);
     // insert("dan", &T);
@@ -35,8 +35,8 @@ int main(int argc, char* argv[]){
     // insert("zoo", &T);
 
     deleteItem("cat", &T);
-    // deleteItem("rat", &T);
-    // deleteItem("bat", &T);
+    deleteItem("rat", &T);
+    deleteItem("bat", &T);
     // deleteItem("crow", &T);
     // deleteItem("dog", &T);
     // deleteItem("dan", &T);
