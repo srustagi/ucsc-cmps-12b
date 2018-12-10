@@ -12,6 +12,9 @@
 #include "string.h"
 
 int maxStrLen(BSTObj * T);
+BSTObj * findLeftMostChild(BSTObj * T);
+BSTObj * get(char * term_to_find, BSTObj * T);
+int deleteItem (char *term_to_delete, BSTObj **pT);
 
 int main(int argc, char* argv[]){
 
@@ -30,15 +33,24 @@ int main(int argc, char* argv[]){
     insert("fox", &T);
     insert("aaz", &T);
     insert("zoo", &T);
-
-    printf("\n%d\n", maxStrLen(T));
-
-    printf("inorder traverse == \n");
+    
     inorderTraverse(stdout, T);
-    printf("\n== after traverse ==\n");
-
-    makeEmpty(&T);
+    printf("\n");
+    deleteItem("aaz", &T);
     inorderTraverse(stdout, T);
+
+
+
+    // inorderTraverse(stdout, T);
+
+    // printf("%s\n", (get("cat", T)) -> term);
+
+    // printf("inorder traverse == \n");
+    // inorderTraverse(stdout, T);
+    // printf("\n== after traverse ==\n");
+
+    // makeEmpty(&T);
+    // inorderTraverse(stdout, T);
 
     return 0;
 }
