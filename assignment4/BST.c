@@ -1,419 +1,478 @@
 /*
- * File: BST.c
- * Name: Shivansh Rustagi
- * Class: CMPS 12B
- * CruzID: shrustag
- * ID Number: 1651034
- * Description: implementations of BST functions
- */
+*BST.c
+*
+*Description
+*	Contains methods to deal with Binary Search Trees
+*
+*methods
+*	void insert
+*	void inorderTraverse
+*	void preorderTraverse
+*	void postorderTraverse
+*	void inorderLeaves
+*	int find
+*	int treeHeight
+*	BSTObj* copyTree
+*	void makeEmpty
+*
+*Author
+*	Mehul Varma
+*	mvarma4
+*Class
+*	CMPS-12B
+*
+*Date
+*	11/18/18
+*	
+*/
 
-#include "BST.h"
-#include <assert.h>
 #include <string.h>
+#include <assert.h>
+#include "BST.h"
 
+
+/* adds a new node to the BST with the new_data values, space must be allocated in the BST node */
 
 /*
- * Function: newBSTObj
- * Params:
- *      char * term: the value of the term for the node to be inserted
- * Return values:
- *      temp: a BSTObj with the specified data as the term and NULL left and right children 
- * Description:
- *      Helper function to allocate space for and create nodes in insert()
+ *insert
+ *
+ *Description
+ *	adds a new node to the BST with the new_data values, space must be allocated in the BST node
+ *
+ *Input
+ *	new_data - string for the new node
+ *	**pBST = pointer to the pointer of the 1st node of the tree
+ *
+ *Output
+ *	void - adds node to the tree
  */
-BSTObj * newBSTObj(char * term);
-BSTObj * findLeftMostChild(BSTObj * T);
-void deleteNode(BSTObj ** T);
-BSTObj * get(char * term_to_find, BSTObj * T);
+void insert(char *new_data,  BSTObj **pBST){
 
-BSTObj * get(char * term_to_find, BSTObj * T) {
-	if ( strcmp(term_to_find, T -> term) == 0 ) 
-	   return T;
-	 
-	// if term_to_find is lexographically less than the term at T, search the left subtree
-	if ( strcmp(term_to_find, T -> term) < 0 ) 
-		return get(term_to_find, T -> leftChild); 
-  
-	// if term_to_find is lexographically greater than the term at T, search the right subtree
-	else
-		return get(term_to_find, T -> rightChild);
-}
-
-void deleteNode(BSTObj ** T) {
-	free(T);
-	* T = NULL;
-}
-
-BSTObj * findLeftMostChild(BSTObj * T) {
-	BSTObj * temp = T;
-	if ( temp -> leftChild == NULL ) {
-		return temp;
+	if( pBST == NULL){
+		fprintf( stderr , "insert - Invalid Input\n");
+		return;
 	}
-	while (temp -> leftChild != NULL) { 
-		temp = temp -> leftChild; 
-	}
-	return temp;
-}
 
-// see prototype for newBSTObj above
-BSTObj * newBSTObj(char * term) {
+	if ( new_data != NULL){
+		
+	        if ( *pBST == NULL){
+
+			BSTObj *ptr = *pBST;
+			ptr = (BSTObj *) malloc(sizeof(BSTObj));
+
+	                char newStr =   (char) calloc(strlen(new_data) , sizeof(char));
+
+        	        int i;
+        	        for(i = 0; i < strlen(new_data); i++){
+        	                newStr[i] = new_data[i];
+        	        }
 	
-	// allocate space for the string and BSTObj
-	BSTObj * temp = (BSTObj *) malloc(sizeof(BSTObj));
-	char * temp_string = (char *) malloc(strlen(term) + 1);
+        	        newStr[i+1] = '\0';
+			ptr->term = newStr;
+	                *pBST = ptr;
+			return;
+		}
+
+		if ( strcmp( new_data , (*pBST)->term) <= 0){
+
+			insert( new_data , &( (*pBST)->leftChild) );
+		}
 	
-	// check for successful allocation
-	assert(temp != NULL);
-	assert(temp_string != NULL);
+		else {
+			insert( new_data , &( (*pBST)->rightChild) );
+		}
+		return;
+	}
+
+	else{
+		fprintf( stderr , "insert - Invalid Input\n");
+	}
+
+}
+
+/*
+ *inorderTraverse
+ *
+ *Description
+ *	print to OUT the inorder traversal
+ *
+ *Input
+ *	out - handle to output file
+ *	*T - pointer to the tree
+ *
+ *Output
+ *	void - just prints the tree inorder traversal
+ */
+void inorderTraverse(FILE *out, BSTObj *T){
+
+	if ( out == NULL){
+		fprintf( stderr , "inorderTraverse - Handle to output file is NULL");
+		return;
+	}
+
+	if ( T == NULL){
+		return;
+	}
+
+	inorderTraverse( out , T->leftChild);
+	fprintf( out ,"%s " , T->term);
+	inorderTraverse( out , T->rightChild);
+
+}
+
+/*
+ *preorderTraverse
+ *
+ *Description
+ *	print to OUT the preorder traversal
+ *
+ *Input
+ *	out - handle to output file
+ *	*T - pointer to the tree
+ *
+ *Output
+ *	void - just prints the tree preorder traversal
+ */
+void preorderTraverse(FILE *out, BSTObj *T){
+
+	if ( out == NULL){
+		fprintf( stderr , "preorderTraverse - Handle to output file is NULL");
+		return;
+	}
+
+	if ( T == NULL){
+		return;
+	}
+
+	fprintf( out ,"%s " , T->term);
+	preorderTraverse( out , T->leftChild);
+	preorderTraverse( out , T->rightChild);
+}
+
+
+/*
+ *postorderTraverse
+ *
+ *Description
+ *	print to OUT the postorder traversal
+ *
+ *Input
+ *	out - handle to output file
+ *	*T - pointer to the tree
+ *
+ *Output
+ *	void - just prints the tree postorder traversal
+ */
+void postorderTraverse(FILE *out, BSTObj *T){
 	
-	// store data in the BSTObj
-	strcpy(temp_string, term);
-	temp -> term = temp_string;
-	temp -> leftChild = NULL;
-	temp -> rightChild = NULL;
+	if ( out == NULL){
+		fprintf( stderr , "postorderTraverse - Handle to output file is NULL");
+		return;
+	}
 
-	// success!
-	return temp;
+	if ( T == NULL){
+		return;
+	}
 
+	postorderTraverse( out , T->leftChild);
+	postorderTraverse( out , T->rightChild);
+	fprintf( out ,"%s " , T->term);
 }
 
 
 /*
- * Function: insert
- * Params:
- *      char * new_data: the String to insert into the tree
- *      BSTObj ** pBST: the pointer to the address of the BST to insert into
- * Return values:
- *      None
- * Description:
- *      Inserts the specified data into a new node into the tree.
+ *inorderLeaves
+ *
+ *Description
+ *	print the leaves of the tree in inorder to OUT
+ *
+ *Input
+ *	out - handle to output file
+ *	*T - pointer to the tree
+ *
+ *Output
+ *	void - just prints the leave nodes of the tree inorder
  */
-void insert(char * new_data, BSTObj ** pBST) {
-
-	if ( new_data == NULL ) {
-		fprintf(stderr, "Sorry, the String to be inserted is NULL, please pass a valid String.\n");
-		return;
-	}
-
-	if ( pBST == NULL ) {
-		fprintf(stderr, "Sorry, the pointer to the tree root is NULL, please pass a valid BST.\n");
-		return;
-	}
-
-	// used to handle the case if new_data is already in the tree
-	BSTObj *temp = NULL;
-
-	// if the tree pointer is NULL
-	if ( *pBST == NULL ) {
-		*pBST = newBSTObj(new_data);
-	}
-
-	// if new_data is already in the tree
-	else if ( strcmp(new_data, (*pBST) -> term) == 0 ) {
-		temp = (*pBST) -> leftChild;
-		(*pBST) -> leftChild = newBSTObj(new_data);
-		((*pBST) -> leftChild) -> leftChild = temp;
-	}
-
-	// if new_data is lexographically less than the term of the current node
-	else if ( strcmp(new_data, (*pBST) -> term) < 0 ) {
-		insert(new_data, &((*pBST) -> leftChild));
-	}
-
-	// if new_data is lexographically more than the term of the current node
-	else if ( strcmp(new_data, (*pBST) -> term) > 0) {
-		insert(new_data, &((*pBST) -> rightChild));
-	}
-
-}
-
-
-/*
- * Function: inorderTraverse
- * Params:
- *      FILE * out: the file to write to
- *      BSTObj * T: the BST to print
- * Return values:
- *      None
- * Description:
- *      Prints the tree using an inorder traversal.
- */
-void inorderTraverse(FILE * out, BSTObj * T) {
-
-	if ( out == NULL ) {
-		fprintf(stderr, "Sorry, the file to write to is NULL, please pass a valid file.\n");
-		return;
-	}
-
-	if ( T == NULL )
-		return;
-	inorderTraverse(out, T -> leftChild);
-	fprintf(out, "%s ", T -> term);
-	inorderTraverse(out, T -> rightChild);
-
-}
-
-
-/*
- * Function: preorderTraverse
- * Params:
- *      FILE * out: the file to write to
- *      BSTObj * T: the BST to print
- * Return values:
- *      None
- * Description:
- *      Prints the tree using a preorder traversal.
- */
-void preorderTraverse(FILE *out, BSTObj *T) {
+void inorderLeaves(FILE *out, BSTObj *T){
 	
-	if ( out == NULL ) {
-		fprintf(stderr, "Sorry, the file to write to is NULL, please pass a valid file.\n");
+	if ( out == NULL){
+		fprintf( stderr , "inorderLeaves - Handle to output file is NULL");
 		return;
 	}
 
-	if ( T == NULL )
-		return;
-	fprintf(out, "%s ", T -> term);
-	preorderTraverse(out, T -> leftChild);
-	preorderTraverse(out, T -> rightChild);
-
-}
-
-
-/*
- * Function: postorderTraverse
- * Params:
- *      FILE * out: the file to write to
- *      BSTObj * T: the BST to print
- * Return values:
- *      None
- * Description:
- *      Prints the tree using a postorder traversal.
- */
-void postorderTraverse(FILE *out, BSTObj *T) {
-
-	if ( out == NULL ) {
-		fprintf(stderr, "Sorry, the file to write to is NULL, please pass a valid file.\n");
+	if ( T == NULL){
 		return;
 	}
 	
-	if ( T == NULL )
-		return;
-	postorderTraverse(out, T -> leftChild);
-	postorderTraverse(out, T -> rightChild);
-	fprintf(out, "%s ", T -> term);
+	inorderLeaves( out , T->leftChild);
 
-}
-
-
-/*
- * Function: inorderLeaves
- * Params:
- *      FILE * out: the file to write to
- *      BSTObj * T: the BST whose leaves to print
- * Return values:
- *      None
- * Description:
- *      Prints the leaves of the BST using a preorder traversal.
- */
-void inorderLeaves(FILE *out, BSTObj *T) {
-
-	if ( out == NULL ) {
-		fprintf(stderr, "Sorry, the file to write to is NULL, please pass a valid file.\n");
-		return;
+	if ((T->leftChild == NULL) && (T->rightChild == NULL)){
+		fprintf( out ,"%s\n" , T->term);
 	}
 
-	if ( T == NULL )
-		return;
-	inorderLeaves(out, T -> leftChild);
-	if ( (T -> leftChild) == NULL && (T -> rightChild) == NULL )
-		fprintf(out, "%s ", T -> term);
-	inorderLeaves(out, T -> rightChild);
-
+	inorderLeaves( out , T->rightChild);
 }
 
 
 /*
- * Function: find
- * Params:
- *      char * term_to_find: the term to find in the BST
- *      BSTObj * T: the BST to search
- * Return values:
- *      TRUE or FALSE as defined in BST.h
- * Description:
- *      Searches the BST for the specifed value.
+ *find
+ *
+ *Description
+ *	return TRUE if the item_to_find matches a string stored in the tree
+ *
+ *Input
+ *	term_to_find - string to find in tree
+ *	*T - pointer to the tree
+ *
+ *Output
+ *	returns 1 if true, 0 if false
  */
-int find(char * term_to_find, BSTObj * T) {
+int find(char *term_to_find, BSTObj *T){
 
-	if ( term_to_find == NULL ) {
-		fprintf(stderr, "Sorry, the String to be found is NULL, please pass a valid String.\n");
+	if ( term_to_find == NULL){
+		fprintf( stderr , "find - pointer to term is null");
+	}
+
+	if ( T != NULL){
+		
+		if ( strcmp( term_to_find , T->term) == 0){
+			return TRUE;
+		}
+
+		else if ( strcmp( term_to_find , T->term) < 0){
+			return find( term_to_find , T->leftChild);
+		}
+
+		else if ( strcmp( term_to_find , T->term) > 0){
+			return find( term_to_find , T->rightChild);
+		}
+
 		return FALSE;
 	}
 
-	// if T is empty, return FALSE
-	if ( T == NULL )
+	else {
 		return FALSE;
-
-	// if the term at T is equal to term_to_find, return TRUE
-	if ( strcmp(term_to_find, T -> term) == 0 ) 
-	   return TRUE;
-	 
-	// if term_to_find is lexographically less than the term at T, search the left subtree
-	if ( strcmp(term_to_find, T -> term) < 0 ) 
-	   return find(term_to_find, T -> leftChild); 
-  
-	// if term_to_find is lexographically greater than the term at T, search the right subtree
-	else
-		return find(term_to_find, T -> rightChild); 
-
+	}
 }
 
-
 /*
- * Function: treeHeight
- * Params:
- *      BSTObj * T: the tree whose height to calculate
- *      int height: the current height of the Tree, used in recursion
- * Return values:
- *      TRUE or FALSE as defined in BST.h
- * Description:
- *      Searches the BST for the specifed value.
- */
-int treeHeight(BSTObj * T, int height) {
+ *treeHeight
+ *
+ *Description
+ *	computes the height of the tree
+ *
+ *Input
+ *	height - current height of the tree while computing
+ *	*T - pointer to the tree
+ *
+ *Output
+ *	returns height of the tree starting from 0
+*/
+int treeHeight(BSTObj *T, int height){
 
-	if ( T == NULL ) {
-		return 0;
+
+	if ( T != NULL){
+	
+		if ( T->leftChild == NULL && T->rightChild == NULL){
+			return height;
+		}
+
+		int max_left = 0;
+		int max_right = 0;
+
+		if ( T->leftChild != NULL) max_left = treeHeight( T->leftChild , 1 + height);
+		if ( T->rightChild != NULL) max_right = treeHeight( T->rightChild , 1 + height);
+	
+		if ( max_left > max_right) return max_left;
+		else return max_right;
+
 	}
 
-	// handle incorrect height pass
-	if ( height < 0 ) {
-		fprintf(stderr, "Sorry, the passed height value is negative. Please pass a zero or positive height with the function.\n");
-		return -1;
+	else {
+		fprintf( stderr , "Invalid Input\n");
+		return;
 	}
-
-	// return the height if the node is a leaf
-	if ( T -> leftChild == NULL && T -> rightChild == NULL )
-		return height + 1;
-
-	// initialize partial sums for recursive height calculation
-	int left = 0;
-	int right = 0;
-
-	// compute the max heights of each left and right subtree
-	if ( T -> leftChild != NULL )
-		left = treeHeight(T -> leftChild, height + 1);
-	if ( T -> rightChild != NULL )
-		right = treeHeight(T -> rightChild, height + 1);
-
-	if ( left > right)
-		return left;
-	return right;
-
-}
-
+} 
 
 /*
- * Function: copyTree
- * Params:
- *      BSTObj * T: the tree to copy
- * Return values:
- *      temp: a pointer to a BST
- * Description:
- *      Creates a memory independent copy of BST T.
- */
-BSTObj * copyTree(BSTObj * T) {
+ *copyTree
+ *
+ *Description
+ *	computes the height of the tree
+ *
+ *Input
+ *	*T - pointer to the tree
+ *
+ *Output
+ *	returns height of the tree starting from 0
+*/
+BSTObj * copyTree(BSTObj *T){
 
-	if ( T == NULL )
+	if ( T == NULL){
 		return T;
+	}
 
-	// allocate space for the copy BST and the term in each node
 	BSTObj * temp = (BSTObj *) malloc(sizeof(BSTObj));
 	temp -> term = (char *) malloc((strlen(T -> term) + 1) * sizeof(char));
 
-	// check for correct allocations
 	assert(temp != NULL);
 	assert(temp -> term != NULL);
 
-	// copy the term from the original node into its corresponding node in the copied tree, and then copy the subtrees
 	strcpy(temp -> term, T -> term);
 	temp -> leftChild = copyTree(T -> leftChild);
 	temp -> rightChild = copyTree(T -> rightChild);
-	
-	// success
-	return temp;
+	return temp;	
 
 }
+
+/*
+ *makeEmpty
+ *
+ *Description
+ *	removes all the nodes from the tree, deallocates space and reset Tree pointer
+ *
+ *Input
+ *	**pT - pointer to the pointer to the tree
+ *
+ *Output
+ *	no output - just frees the tree
+*/
+void makeEmpty(BSTObj **pT){
+
+	if( *pT != NULL){
+
+		BSTObj *ptr1 = NULL;
+		BSTObj *ptr2 = NULL;
+
+		ptr1 = (*pT)->leftChild;
+		ptr2 = (*pT)->rightChild;
+			
+		makeEmpty( &ptr1);
+		makeEmpty( &ptr2);
+
+		free((*pT)->term);
+		free(*pT);
+
+		return;		
+	}
+	
+	return;
+}
+
+/*
+ *findLeftMost
+ *
+ *Description
+ *	finds the left most child node connected to node passed, helper method for deleteItem
+ *
+ *Input
+ *	**pT - pointer to the node whose left most child node is to be returned
+ *
+ *Output
+ *	left most child node is returned
+*/
+BSTObj* findLeftMost ( BSTObj *T){
+
+	if(T->leftChild != NULL){
+                return findLeftMost(T->leftChild);
+        }
+        else{
+                return T;
+        }
+}
+
 
 
 /*
- * Function: makeEmpty
- * Params:
- *      BSTObj ** pT: the tree to empty
- * Return values:
- *      None
- * Description:
- *      Empty out the tree: deallocate space and NULL the pointer to it.
- */
-void makeEmpty(BSTObj ** pT) {
-
-	if ( pT == NULL ) {
-		fprintf(stderr, "Sorry, the pointer to the tree root is NULL, please pass a valid BST.\n");
-		return;
-	}
-
-	if ( *pT == NULL )
-		return;
-
-	else {
-		// empty the left and right children
-		makeEmpty(&((*pT) -> leftChild));
-		makeEmpty(&((*pT) -> rightChild));
-		// free the term of the node
-		free((*pT) -> term);
-		(*pT) -> term = NULL;
-		// free the node itself
-		free(*pT);
-		*pT = NULL;
-	}
-
-}
-
-
+ *deleteItem
+ *
+ *Description
+ *	deletes the node in the binary search tree, whose term matches the term passed in the function
+ *
+ *Input
+ *	**pT - pointer to the pointer to the tree
+ *	*term_to_delete - the term, whose node has to be deleted from the tree if it exists in it
+ *
+ *Output
+ *	no output - just deletes the node from the tree
+*/
 int deleteItem (char *term_to_delete, BSTObj **pT){
-	BSTObj * T = *pT;
-	if(T == NULL){
-		fprintf(stderr, "ERROR: node does not exist in tree");
-		return FALSE;
+
+	/* check if pointer passed is NULL */
+	if ( pT == NULL){
+		fprintf(stderr, "Null pointer passed.\n");
+		return 0;
 	}
-	int cmp = strcmp(T->term, term_to_delete);
-	if(cmp > 0)
-			return deleteItem(term_to_delete, &((*pT)->leftChild));
-	else if(cmp < 0)
-			return deleteItem(term_to_delete, &((*pT)->rightChild));
+
+	/* check if the term passed, whose node has to deleted, is NULL*/ 
+	if ( term_to_delete == NULL) {
+		fprintf(stderr, "Null string passed.\n");
+		return 0;
+	}
+
+	/* if pointer passed is to an empty tree, nothing can be deleted, error statement is printed*/
+	if ( *pT == NULL){
+		fprintf(stderr , "Cannot delete from empty tree\n");
+		return 0;
+	}
+
+	/* check is the term passed matches to the term of any node in the tree*/
+	if(find(term_to_delete, *pT) == 0){
+		fprintf(stderr, "Can't find the item.\n");
+		return 0;
+	}
+
+	int cmp = strcmp((*pT)->term, term_to_delete);
+
+	/* if node to be deleted is on the left subtree of current node (*pT), the function recurses until it finds the node to be deleted and deletes it using the else statement of this fucnction */
+	if(cmp > 0){
+		deleteItem(term_to_delete, &((*pT)->leftChild));
+        }
+	/* if node to be deleted is on the right subtree of current node (*pT), the function recurses until it finds the node to be deleted and deletes it using the else statement of this fucnction */
+	else if(cmp < 0){
+		deleteItem(term_to_delete, &((*pT)->rightChild));
+	}
+
+	/* if node to be deleted is the currrent node passed (*pT)*/
 	else{
-			if(T->leftChild == NULL && T->rightChild == NULL){
-					free((*pT)->term);
-					free(*pT);
-					(*pT)->term = NULL;
-					*pT = NULL;
-			}
-			else if(T->leftChild == NULL){
-					BSTObj *tmp = *pT;
-					*pT = (*pT)->rightChild;
-					free(tmp->term);
-					free(tmp);
-			}
-			else if(T->rightChild == NULL){
-					BSTObj *tmp = *pT;
-					*pT = (*pT)->leftChild;
-					free(tmp->term);
-					free(tmp);
-			}
-			else{
-					BSTObj *tmp = findLeftMostChild(T->rightChild);
-					strcpy(T->term, tmp->term);
-					return deleteItem(T->term, &(T->rightChild));
-			}
+    
+		/* if node to be deleted has no children nodes*/
+		if ( (*pT)->rightChild == NULL && (*pT)->leftChild == NULL){
+
+			BSTObj* temp = *pT;
+			free(temp->term);
+			free(temp);
+			*pT = NULL;
+		}
+
+		/* if node to be deleted has only rightChild */
+		else if ( (*pT)->rightChild != NULL && (*pT)->leftChild == NULL){
+			
+			BSTObj* temp = *pT;
+			*pT = (*pT)->rightChild;
+			free(temp);
+			temp = NULL;
+		}
+
+		/* if node to be deleted has only leffChild */
+		else if ( (*pT)->rightChild == NULL && (*pT)->leftChild != NULL){
+			BSTObj* temp = *pT;
+			*pT = (*pT)->leftChild;
+			free(temp);
+			temp = NULL;
+
+		}
+
+		/* if node to be deleted has two children nodes */
+		/* swap the term of the head of the tree with the left most child of the right child, and delete that node from the tree */
+                else{
+			BSTObj* temp = findLeftMost( (*pT)->rightChild);
+			strcpy((*pT)->term , temp->term);
+                       	deleteItem(temp->term, (&((*pT)->rightChild)));  
+			temp = NULL;
+		}
+
+		return 1;
 	}
-	return TRUE;
+
 }
