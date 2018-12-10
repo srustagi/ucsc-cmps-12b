@@ -60,7 +60,7 @@ BSTObj * newBSTObj(char * term) {
 	
 	// allocate space for the string and BSTObj
 	BSTObj * temp = (BSTObj *) malloc(sizeof(BSTObj));
-	char * temp_string = (char *) malloc((strlen(term) + 1) * sizeof(char));
+	char * temp_string = (char *) malloc(strlen(term) + 1);
 	
 	// check for successful allocation
 	assert(temp != NULL);

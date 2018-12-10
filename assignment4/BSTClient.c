@@ -18,32 +18,32 @@ int deleteItem (char *term_to_delete, BSTObj **pT);
 
 int main(int argc, char* argv[]){
 
-    BSTObj  *T;
+    BSTObj *T;
     
     T = NULL;
 
     printf("inserting a lot of nodes to build a tree \n");
     insert("cat", &T);
-    insert("rat", &T);
-    insert("bat", &T);
-    insert("crow", &T);
-    insert("dog", &T);
-    insert("dan", &T);
-    insert("dtsh", &T);
-    insert("fox", &T);
-    insert("aaz", &T);
-    insert("zoo", &T);
+    // insert("rat", &T);
+    // insert("bat", &T);
+    // insert("crow", &T);
+    // insert("dog", &T);
+    // insert("dan", &T);
+    // insert("dtsh", &T);
+    // insert("fox", &T);
+    // insert("aaz", &T);
+    // insert("zoo", &T);
 
     deleteItem("cat", &T);
-    deleteItem("rat", &T);
-    deleteItem("bat", &T);
-    deleteItem("crow", &T);
-    deleteItem("dog", &T);
-    deleteItem("dan", &T);
-    deleteItem("dtsh", &T);
-    deleteItem("fox", &T);
-    deleteItem("aaz", &T);
-    deleteItem("zoo", &T);
+    // deleteItem("rat", &T);
+    // deleteItem("bat", &T);
+    // deleteItem("crow", &T);
+    // deleteItem("dog", &T);
+    // deleteItem("dan", &T);
+    // deleteItem("dtsh", &T);
+    // deleteItem("fox", &T);
+    // deleteItem("aaz", &T);
+    // deleteItem("zoo", &T);
     
     inorderTraverse(stdout, T);
     printf("\n");
