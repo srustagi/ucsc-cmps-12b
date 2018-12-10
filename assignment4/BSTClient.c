@@ -33,10 +33,20 @@ int main(int argc, char* argv[]){
     insert("fox", &T);
     insert("aaz", &T);
     insert("zoo", &T);
+
+    deleteItem("cat", &T);
+    deleteItem("rat", &T);
+    deleteItem("bat", &T);
+    deleteItem("crow", &T);
+    deleteItem("dog", &T);
+    deleteItem("dan", &T);
+    deleteItem("dtsh", &T);
+    deleteItem("fox", &T);
+    deleteItem("aaz", &T);
+    deleteItem("zoo", &T);
     
     inorderTraverse(stdout, T);
     printf("\n");
-    deleteItem("aaz", &T);
     inorderTraverse(stdout, T);
 
 
