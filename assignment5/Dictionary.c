@@ -215,44 +215,22 @@ bool delete(HashTableObj *H, char *str) {
 	return false;
 }
 
-void deleteHashTable(HashTableObj * H){
-	bucketList curr, temp;
+void deleteHashTable (HashTableObj * H) {
 	int i;
-
-	if(H == NULL){
-		fprintf(stderr, "Hashtable does not exist, so can't insert.\n");
-		return;
-	}
-	i = 0;
-	curr = NULL;
-	temp = NULL;
-	while(i < H->size){
-		curr = H->bucket[i];
-		while(curr!=NULL){
-			temp = curr;
-			curr = curr -> next;
-			free(temp);
+	bucketList temp = NULL;
+	bucketList curr = NULL;
+	for ( int i = 0; i < H -> size; i++ ) {
+		if((H -> bucket)[i] -> item != NULL) {
+			curr = H -> bucket[i];
+			while(curr != NULL) {
+				temp = curr;
+				curr = curr -> next;
+				free(temp);
+			}
 		}
-		i++;
 	}
 	free(H);
 }
-// void deleteHashTable (HashTableObj * H) {
-// 	int i;
-// 	bucketList temp = NULL;
-// 	bucketList curr = NULL;
-// 	for ( int i = 0; i < H -> size; i++ ) {
-// 		if((H -> bucket)[i] -> item != NULL) {
-// 			curr = H -> bucket[i];
-// 			while(curr != NULL) {
-// 				temp = curr;
-// 				curr = curr -> next;
-// 				// free(temp);
-// 			}
-// 		}
-// 	}
-// 	// free(H);
-// }
 
 void printHashTable(FILE *out, HashTableObj *H) {
 	bucketList list;
