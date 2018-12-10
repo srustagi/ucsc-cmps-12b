@@ -215,23 +215,6 @@ bool delete(HashTableObj *H, char *str) {
 	return false;
 }
 
-// void deleteHashTable (HashTableObj * H) {
-// 	int i;
-// 	bucketList temp = NULL;
-// 	bucketList curr = NULL;
-// 	for ( int i = 0; i < H -> size; i++ ) {
-// 		if((H -> bucket)[i] -> item != NULL) {
-// 			curr = H -> bucket[i];
-// 			while(curr!=NULL){
-// 				temp = curr;
-// 				curr = curr -> next;
-// 				free(temp);
-// 			}
-// 		}
-// 	}
-// 	free(H);
-// }
-
 void deleteHashTable(HashTableObj * H){
 	bucketList curr, temp;
 	int i;
@@ -254,6 +237,22 @@ void deleteHashTable(HashTableObj * H){
 	}
 	free(H);
 }
+// void deleteHashTable (HashTableObj * H) {
+// 	int i;
+// 	bucketList temp = NULL;
+// 	bucketList curr = NULL;
+// 	for ( int i = 0; i < H -> size; i++ ) {
+// 		if((H -> bucket)[i] -> item != NULL) {
+// 			curr = H -> bucket[i];
+// 			while(curr != NULL) {
+// 				temp = curr;
+// 				curr = curr -> next;
+// 				// free(temp);
+// 			}
+// 		}
+// 	}
+// 	// free(H);
+// }
 
 void printHashTable(FILE *out, HashTableObj *H) {
 	bucketList list;

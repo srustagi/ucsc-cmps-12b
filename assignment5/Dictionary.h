@@ -1,5 +1,11 @@
-
-
+/*
+ * File: Dictionary.h
+ * Name: Shivansh Rustagi
+ * Class: CMPS 12B
+ * CruzID: shrustag
+ * ID Number: 1651034
+ * Description: implementations of Hash Table and all associated helper functions
+ */
 
 //-----------------------------------------------------------------------------
 // Dictionary.h
@@ -11,7 +17,6 @@
 // the new function that creates the hash table.
 //
 //-----------------------------------------------------------------------------
-
 
 #include <stdlib.h>
 #include <stdio.h>
