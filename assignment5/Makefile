@@ -1,6 +1,9 @@
-#------------------------------------------------------------------------------
-# Makefile for Dictionary with Hash Table Implementation and test Client
-#------------------------------------------------------------------------------
+# File: Makefile
+# Name: Shivansh Rustagi
+# Class: CMPS 12B
+# CruzID: shrustag
+# ID Number: 1651034
+# Description: Makefile for Dictionary with Hash Table Implementation and test Client
 
 ADT_NAME  =  Dictionary
 SOURCES   = $(ADT_NAME).c    $(ADT_NAME)Client.c
