@@ -290,10 +290,6 @@ void deleteHashTable (HashTableObj * H) {
 		fprintf(stderr, "Sorry, the hash table is NULL, please pass a valid table.\n");
 		return;
 	}
-	if ( H -> size < 1 ) {
-		fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", H -> size);
-		return;
-	}
 
 	for ( int i = 0; i < H -> size; i++ ) {
 		delete_temp = H -> bucket[i];
