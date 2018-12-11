@@ -74,8 +74,6 @@ main () {
 	"yahoo.co.jp",
 	"youtube.co"};
 
-
-
     HashTableObj * H;
     int i;
 

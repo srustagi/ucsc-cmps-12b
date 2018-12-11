@@ -1,4 +1,3 @@
-
 /*
  * File: Dictionary.c
  * Name: Shivansh Rustagi
@@ -128,6 +127,10 @@ bucketList find_bucket(bucketList b, char * term) {
  *      Constructor for the hash table object
  */
 HashTableObj * newHashTable(int size) {
+	if ( size < 1 ) {
+		fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", size);
+		return NULL;
+	}
 	int i;
 	HashTableObj * table = (HashTableObj *) malloc(sizeof(HashTableObj) + sizeof(bucketListObj) * size);
 	assert(table != NULL);
@@ -154,7 +157,10 @@ bool member(HashTableObj *H, char *str) {
 		fprintf(stderr, "Sorry, the passed hash table is a NULL reference, please pass a valid hash table and try again.\n");
 		return false;
 	}
-
+	if ( H -> size < 1 ) {
+		fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", H -> size);
+		return false;
+	}
 	if ( str == NULL ) {
 		fprintf(stderr, "Sorry, the string passed is a NULL reference, please pass a valid string and try again.\n");
 		return false;
@@ -181,6 +187,10 @@ void insert(HashTableObj * H, char * str) {
 
 	if ( H == NULL ) {
 		fprintf(stderr, "Sorry, the passed hash table is a NULL reference, please pass a valid hash table and try again.\n");
+		return;
+	}
+	if ( H -> size < 1 ) {
+		fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", H -> size);
 		return;
 	}
 	if ( str == NULL ) {
@@ -216,6 +226,10 @@ bool delete(HashTableObj * H, char * str) {
 
 	if ( H == NULL ) {
 		fprintf(stderr, "Sorry, the passed hash table is a NULL reference, please pass a valid hash table and try again.\n");
+		return false;
+	}
+	if ( H -> size < 1 ) {
+		fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", H -> size);
 		return false;
 	}
 	if ( str == NULL ) {
@@ -269,18 +283,25 @@ bool delete(HashTableObj * H, char * str) {
  *      Delete and deallocate the space for every bucket in the hash table, then the table itself
  */
 void deleteHashTable (HashTableObj * H) {
-	int i;
 	bucketList temp = NULL;
 	bucketList delete_temp = NULL;
+
+	if ( H == NULL ) {
+		fprintf(stderr, "Sorry, the hash table is NULL, please pass a valid table.\n");
+		return;
+	}
+	if ( H -> size < 1 ) {
+		fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", H -> size);
+		return;
+	}
+
 	for ( int i = 0; i < H -> size; i++ ) {
-		// if((H -> bucket)[i] -> item != NULL) {
-			delete_temp = H -> bucket[i];
-			while(delete_temp != NULL) {
-				temp = delete_temp;
-				delete_temp = delete_temp -> next;
-				free(temp);
-			}
-		// }
+		delete_temp = H -> bucket[i];
+		while(delete_temp != NULL) {
+			temp = delete_temp;
+			delete_temp = delete_temp -> next;
+			free(temp);
+		}
 	}
 	free(H);
 }
@@ -299,8 +320,13 @@ void deleteHashTable (HashTableObj * H) {
 void printHashTable(FILE * out, HashTableObj * H) {
 	bucketList list;
 	int i;
+
 	if (H == NULL) {
 		fprintf(stderr, "Hashtable does not exist, so can't print it.\n");
+		return;
+	}
+	if ( H -> size < 1 ) {
+		fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", H -> size);
 		return;
 	}
 	if (out == NULL) {

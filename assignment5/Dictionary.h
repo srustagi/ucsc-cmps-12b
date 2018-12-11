@@ -52,14 +52,63 @@ typedef struct HashTableObj {
  */
 HashTableObj * newHashTable(int size);
 
+/*
+ * Function: deleteHashTable
+ * Params:
+ * 		HashTableObj * H: the Hash table to delete
+ * Return values:
+ *      None
+ * Description:
+ *      Delete and deallocate the space for every bucket in the hash table, then the table itself
+ */
 void 		deleteHashTable(HashTableObj * H);
 
+/*
+ * Function: member
+ * Params:
+ * 		HashTableObj * H: the hastable object to check
+ *      char * str: the string to find in the Hash Table
+ * Return values:
+ *      boolean: true if the object is in the hashtable, and false if not
+ * Description:
+ *      Checks to see if the string is a member of the hashtable or not
+ */
 bool		member(HashTableObj *H, char *str);
 
+/*
+ * Function: insert
+ * Params:
+ * 		HashTableObj * H: the first item in the list
+ *      char * str: the string to find in the list
+ * Return values:
+ *      None
+ * Description:
+ *      Inserts the item into the table in the appropriate bucket, at the front of the linkedlist
+ */
 void 		insert(HashTableObj *H, char *str);
 
+/*
+ * Function: delete
+ * Params:
+ * 		HashTableObj * H: the Hash table to delete from
+ *      char * str: the term to delete
+ * Return values:
+ *      true if the item was deleted, false otherwise
+ * Description:
+ *      Deletes the item from the hash table
+ */
 bool		delete(HashTableObj *H, char *str);
 
+/*
+ * Function: printHashTable
+ * Params:
+ * 		FILE * out: the file to print to
+ *      HashTableObj * H: the hash table to print
+ * Return values:
+ *      None
+ * Description:
+ *      Prints the hash table to the specified file
+ */
 void		printHashTable(FILE *out, HashTableObj *H);
 
 #endif
