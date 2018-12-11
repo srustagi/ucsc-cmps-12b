@@ -157,10 +157,10 @@ bool member(HashTableObj *H, char *str) {
 		fprintf(stderr, "Sorry, the passed hash table is a NULL reference, please pass a valid hash table and try again.\n");
 		return false;
 	}
-	// if ( H -> size < 1 ) {
-	// 	fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", H -> size);
-	// 	return false;
-	// }
+	if ( H -> size < 1 ) {
+		fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", H -> size);
+		return false;
+	}
 	if ( str == NULL ) {
 		fprintf(stderr, "Sorry, the string passed is a NULL reference, please pass a valid string and try again.\n");
 		return false;
@@ -189,10 +189,10 @@ void insert(HashTableObj * H, char * str) {
 		fprintf(stderr, "Sorry, the passed hash table is a NULL reference, please pass a valid hash table and try again.\n");
 		return;
 	}
-	// if ( H -> size < 1 ) {
-	// 	fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", H -> size);
-	// 	return;
-	// }
+	if ( H -> size < 1 ) {
+		fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", H -> size);
+		return;
+	}
 	if ( str == NULL ) {
 		fprintf(stderr, "Sorry, the string passed is a NULL reference, please pass a valid string and try again.\n");
 		return;
@@ -228,10 +228,10 @@ bool delete(HashTableObj * H, char * str) {
 		fprintf(stderr, "Sorry, the passed hash table is a NULL reference, please pass a valid hash table and try again.\n");
 		return false;
 	}
-	// if ( H -> size < 1 ) {
-	// 	fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", H -> size);
-	// 	return false;
-	// }
+	if ( H -> size < 1 ) {
+		fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", H -> size);
+		return false;
+	}
 	if ( str == NULL ) {
 		fprintf(stderr, "Sorry, the string passed is a NULL reference, please pass a valid string and try again.\n");
 		return false;
@@ -300,6 +300,7 @@ void deleteHashTable (HashTableObj * H) {
 		}
 	}
 	free(H);
+	H = NULL;
 }
 
 
@@ -321,11 +322,12 @@ void printHashTable(FILE * out, HashTableObj * H) {
 		fprintf(stderr, "Hashtable does not exist, so can't print it.\n");
 		return;
 	}
+
 	if (out == NULL) {
 		fprintf(stderr, "File stream to print to does not exist.\n");
 		return;
 	}
-	
+
 	list = NULL;
 	fprintf(out, "Hash table contents\n");
 	for ( i = 0; i < H -> size; i++ ) {
