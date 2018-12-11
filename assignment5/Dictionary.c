@@ -321,10 +321,6 @@ void printHashTable(FILE * out, HashTableObj * H) {
 		fprintf(stderr, "Hashtable does not exist, so can't print it.\n");
 		return;
 	}
-	if ( H -> size < 1 ) {
-		fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", H -> size);
-		return;
-	}
 	if (out == NULL) {
 		fprintf(stderr, "File stream to print to does not exist.\n");
 		return;
