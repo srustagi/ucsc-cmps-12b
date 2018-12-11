@@ -1,3 +1,4 @@
+
 /*
  * File: Dictionary.c
  * Name: Shivansh Rustagi
@@ -115,7 +116,16 @@ bucketList find_bucket(bucketList b, char * term) {
 	return temp;
 }
 
-// Hash Table Functions
+
+/*
+ * Function: newHashTable
+ * Params:
+ *      int size: the size of the hash table
+ * Return values:
+ *      table: a pointer to the memory for the newly allocated memory for the hash table object 
+ * Description:
+ *      Constructor for the hash table object
+ */
 HashTableObj * newHashTable(int size) {
 	int i;
 	HashTableObj * table = (HashTableObj *) malloc(sizeof(HashTableObj) + sizeof(bucketListObj) * size);
@@ -127,6 +137,17 @@ HashTableObj * newHashTable(int size) {
 	return table;
 }
 
+
+/*
+ * Function: member
+ * Params:
+ * 		HashTableObj * H: the hastable object to check
+ *      char * str: the string to find in the Hash Table
+ * Return values:
+ *      boolean: true if the object is in the hashtable, and false if not
+ * Description:
+ *      Checks to see if the string is a member of the hashtable or not
+ */
 bool member(HashTableObj *H, char *str) {
 	if ( H == NULL ) {
 		fprintf(stderr, "Sorry, the passed hash table is a NULL reference, please pass a valid hash table and try again.\n");
@@ -143,14 +164,24 @@ bool member(HashTableObj *H, char *str) {
 	return true;
 }
 
-void insert(HashTableObj *H, char *str) {
+
+/*
+ * Function: insert
+ * Params:
+ * 		HashTableObj * H: the first item in the list
+ *      char * str: the string to find in the list
+ * Return values:
+ *      None
+ * Description:
+ *      Inserts the item into the table in the appropriate bucket, at the front of the linkedlist
+ */
+void insert(HashTableObj * H, char * str) {
 	int index;
 
 	if ( H == NULL ) {
 		fprintf(stderr, "Sorry, the passed hash table is a NULL reference, please pass a valid hash table and try again.\n");
 		return;
 	}
-
 	if ( str == NULL ) {
 		fprintf(stderr, "Sorry, the string passed is a NULL reference, please pass a valid string and try again.\n");
 		return;
@@ -166,7 +197,18 @@ void insert(HashTableObj *H, char *str) {
 	}
 }
 
-bool delete(HashTableObj *H, char *str) {
+
+/*
+ * Function: delete
+ * Params:
+ * 		HashTableObj * H: the Hash table to delete from
+ *      char * str: the term to delete
+ * Return values:
+ *      true if the item was deleted, false otherwise
+ * Description:
+ *      Deletes the item from the hash table
+ */
+bool delete(HashTableObj * H, char * str) {
 	int index;
 	bucketList temp = NULL;
 	bucketList delete_temp = NULL;
@@ -215,16 +257,26 @@ bool delete(HashTableObj *H, char *str) {
 	return false;
 }
 
+
+/*
+ * Function: deleteHashTable
+ * Params:
+ * 		HashTableObj * H: the Hash table to delete
+ * Return values:
+ *      None
+ * Description:
+ *      Delete and deallocate the space for every bucket in the hash table, then the table itself
+ */
 void deleteHashTable (HashTableObj * H) {
 	int i;
 	bucketList temp = NULL;
-	bucketList curr = NULL;
+	bucketList delete_temp = NULL;
 	for ( int i = 0; i < H -> size; i++ ) {
 		if((H -> bucket)[i] -> item != NULL) {
-			curr = H -> bucket[i];
-			while(curr != NULL) {
-				temp = curr;
-				curr = curr -> next;
+			delete_temp = H -> bucket[i];
+			while(delete_temp != NULL) {
+				temp = delete_temp;
+				delete_temp = delete_temp -> next;
 				free(temp);
 			}
 		}
@@ -232,7 +284,18 @@ void deleteHashTable (HashTableObj * H) {
 	free(H);
 }
 
-void printHashTable(FILE *out, HashTableObj *H) {
+
+/*
+ * Function: printHashTable
+ * Params:
+ * 		FILE * out: the file to print to
+ *      HashTableObj * H: the string to find in the list
+ * Return values:
+ *      None
+ * Description:
+ *      Inserts the item into the table in the appropriate bucket, at the front of the linkedlist
+ */
+void printHashTable(FILE * out, HashTableObj * H) {
 	bucketList list;
 	int i;
 	if (H == NULL) {
