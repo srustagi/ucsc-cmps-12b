@@ -282,21 +282,36 @@ bool delete(HashTableObj * H, char * str) {
  * Description:
  *      Delete and deallocate the space for every bucket in the hash table, then the table itself
  */
+// void deleteHashTable (HashTableObj * H) {
+// 	bucketList temp = NULL;
+// 	bucketList delete_temp = NULL;
+
+// 	if ( H == NULL ) {
+// 		fprintf(stderr, "Sorry, the hash table is NULL, please pass a valid table.\n");
+// 		return;
+// 	}
+
+// 	for ( int i = 0; i < H -> size; i++ ) {
+// 		delete_temp = H -> bucket[i];
+// 		while(delete_temp != NULL) {
+// 			temp = delete_temp;
+// 			delete_temp = delete_temp -> next;
+// 			free(temp);
+// 		}
+// 	}
+// 	free(H);
+// }
 void deleteHashTable (HashTableObj * H) {
 	bucketList temp = NULL;
-	bucketList delete_temp = NULL;
-
-	if ( H == NULL ) {
-		fprintf(stderr, "Sorry, the hash table is NULL, please pass a valid table.\n");
-		return;
-	}
-
+	bucketList curr = NULL;
 	for ( int i = 0; i < H -> size; i++ ) {
-		delete_temp = H -> bucket[i];
-		while(delete_temp != NULL) {
-			temp = delete_temp;
-			delete_temp = delete_temp -> next;
-			free(temp);
+		if((H -> bucket)[i] -> item != NULL) {
+			curr = H -> bucket[i];
+			while(curr != NULL) {
+				temp = curr;
+				curr = curr -> next;
+				free(temp);
+			}
 		}
 	}
 	free(H);
