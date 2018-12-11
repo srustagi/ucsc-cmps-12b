@@ -3,8 +3,8 @@
 #------------------------------------------------------------------------------
 
 ADT_NAME  =  Dictionary
-SOURCES   = $(ADT_NAME).c    $(ADT_NAME)Client2.c
-OBJECTS   = $(ADT_NAME).o    $(ADT_NAME)Client2.o
+SOURCES   = $(ADT_NAME).c    $(ADT_NAME)Client.c
+OBJECTS   = $(ADT_NAME).o    $(ADT_NAME)Client.o
 HEADERS   = $(ADT_NAME).h  
 EXEBIN    = DictionaryTest
 FLAGS     = -std=c99 -Wall

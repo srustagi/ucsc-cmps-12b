@@ -76,7 +76,7 @@ main () {
 
 
 
-    HashTableObj  *H;
+    HashTableObj * H;
     int i;
 
     // you can make this hash table size anything you like that is a prime but the example
@@ -88,7 +88,8 @@ main () {
     }
     // printf("%d\n", member(H, "google.com"));
     printHashTable(stdout, H);
-    // deleteHashTable(H);
+    deleteHashTable(H);
+    printHashTable(stdout, H);
 }
 
 

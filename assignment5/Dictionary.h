@@ -41,11 +41,25 @@ typedef struct HashTableObj {
 	bucketList bucket[];
 } HashTableObj;
 
-
+/*
+ * Function: newHashTable
+ * Params:
+ *      int size: the size of the hash table
+ * Return values:
+ *      table: a pointer to the memory for the newly allocated memory for the hash table object 
+ * Description:
+ *      Constructor for the hash table object
+ */
 HashTableObj * newHashTable(int size);
+
 void 		deleteHashTable(HashTableObj * H);
+
 bool		member(HashTableObj *H, char *str);
+
 void 		insert(HashTableObj *H, char *str);
+
 bool		delete(HashTableObj *H, char *str);
+
 void		printHashTable(FILE *out, HashTableObj *H);
+
 #endif

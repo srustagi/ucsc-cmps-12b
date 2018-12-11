@@ -117,6 +117,7 @@ bucketList find_bucket(bucketList b, char * term) {
 }
 
 
+// ------ Hash Table Functions ------
 /*
  * Function: newHashTable
  * Params:
@@ -272,14 +273,14 @@ void deleteHashTable (HashTableObj * H) {
 	bucketList temp = NULL;
 	bucketList delete_temp = NULL;
 	for ( int i = 0; i < H -> size; i++ ) {
-		if((H -> bucket)[i] -> item != NULL) {
+		// if((H -> bucket)[i] -> item != NULL) {
 			delete_temp = H -> bucket[i];
 			while(delete_temp != NULL) {
 				temp = delete_temp;
 				delete_temp = delete_temp -> next;
 				free(temp);
 			}
-		}
+		// }
 	}
 	free(H);
 }
@@ -289,11 +290,11 @@ void deleteHashTable (HashTableObj * H) {
  * Function: printHashTable
  * Params:
  * 		FILE * out: the file to print to
- *      HashTableObj * H: the string to find in the list
+ *      HashTableObj * H: the hash table to print
  * Return values:
  *      None
  * Description:
- *      Inserts the item into the table in the appropriate bucket, at the front of the linkedlist
+ *      Prints the hash table to the specified file
  */
 void printHashTable(FILE * out, HashTableObj * H) {
 	bucketList list;
@@ -312,7 +313,7 @@ void printHashTable(FILE * out, HashTableObj * H) {
 		list = H -> bucket[i];
 		fprintf(out, "bucket %d\n", i);
 		while (list != NULL) {
-			fprintf(out, "\tbucket list item = %s\n", list->item);//print the shit and its value
+			fprintf(out, "\tbucket list item = %s\n", list->item);
 			list = list -> next;
 		}
 	}
