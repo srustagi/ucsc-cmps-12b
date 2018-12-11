@@ -127,10 +127,10 @@ bucketList find_bucket(bucketList b, char * term) {
  *      Constructor for the hash table object
  */
 HashTableObj * newHashTable(int size) {
-	// if ( size < 1 ) {
-	// 	fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", size);
-	// 	return NULL;
-	// }
+	if ( size < 1 ) {
+		fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", size);
+		return NULL;
+	}
 	int i;
 	HashTableObj * table = (HashTableObj *) malloc(sizeof(HashTableObj) + sizeof(bucketListObj) * size);
 	assert(table != NULL);
@@ -300,7 +300,6 @@ void deleteHashTable (HashTableObj * H) {
 		}
 	}
 	free(H);
-	H = NULL;
 }
 
 
@@ -322,12 +321,14 @@ void printHashTable(FILE * out, HashTableObj * H) {
 		fprintf(stderr, "Hashtable does not exist, so can't print it.\n");
 		return;
 	}
-
+	if ( H -> size < 1 ) {
+		fprintf(stderr, "Sorry, the size is %d, please pass a size > 0\n", H -> size);
+		return;
+	}
 	if (out == NULL) {
 		fprintf(stderr, "File stream to print to does not exist.\n");
 		return;
 	}
-
 	list = NULL;
 	fprintf(out, "Hash table contents\n");
 	for ( i = 0; i < H -> size; i++ ) {
